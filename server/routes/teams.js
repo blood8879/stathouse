@@ -40,9 +40,15 @@ router.post('/teamlist', (req, res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 100;
     let skip = req.body.skip ? parseInt(req.body.skip) : 0;
     let term = req.body.searchTerm
+    // mongodb 부분 일치 검색 기능(like) 사용하려면 정규표현식 써줘야 동작함.
+    const regex = (pattern) => new RegExp(`.*${pattern}.*`);
+    const Regex = regex(term)
+    // `.*${term}.*`
 
     if(term) {
-        Team.find({ $text: { $search: term } })
+        // Team.find({ $text: { $search: term } }) // 주석 처리한 내용은 완전 일치 검색
+        // 복수 검색 및 대소문자 구분없이 검색 위한 "i" options 적용
+        Team.find({ $or: [ { name: Regex }, { ticker: { "$regex": Regex, "$options": "i" }} ]})
         .populate("owner")
         .skip(skip)
         .limit(limit)
