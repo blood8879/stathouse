@@ -1,0 +1,66 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/cache": "11.4.0",
+    "@emotion/react": "11.4.1",
+    "@emotion/styled": "11.3.0",
+    "@mui/icons-material": "5.2.0",
+    "@mui/material": "5.2.0",
+    "@mui/styled-engine": "5.2.0",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.1.0",
+    "@testing-library/user-event": "12.1.10",
+    "antd": "^3.24.1",
+    "axios": "^0.26.1",
+    "chroma-js": "2.1.2",
+    "flatpickr": "4.6.9",
+    "formik": "^2.2.9",
+    "http-proxy-middleware": "^2.0.4",
+    "prop-types": "15.7.2",
+    "react": "17.0.2",
+    "react-copy-to-clipboard": "5.0.4",
+    "react-countup": "6.1.0",
+    "react-dom": "17.0.2",
+    "react-dropzone": "^12.0.5",
+    "react-flatpickr": "3.10.7",
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "4.0.3",
+    "react-syntax-highlighter": "15.4.5",
+    "redux": "^4.1.2",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.4.1",
+    "rellax": "1.12.1",
+    "swiper": "7.3.4",
+    "typed.js": "2.0.12",
+    "uuid": "8.3.2",
+    "web-vitals": "1.0.1",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
