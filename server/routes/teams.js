@@ -3,6 +3,7 @@ const res = require('express/lib/response');
 const multer = require('multer');
 const router = express.Router();
 const { Team } = require('../models/Team');
+const { User } = require('../models/User');
 
 //=================================
 //             Teams
@@ -31,9 +32,28 @@ router.post('/emblem', (req, res) => {
 router.post('/', (req, res) => {
     const team = new Team(req.body)
     team.save((err) => {
+        User.findOneAndUpdate(
+            { _id: req.body.owner },
+            {
+                $push: {
+                    teams: {
+                        id: team._id,
+                        date: Date.now()
+                    }
+                }
+            },
+            { new: true },
+            (err, userInfo) => {
+                // if(err) return res.status(400).json({ success: false, err }) 
+                // res.status(200).send(userInfo.teams)
+                // next();
+            }
+        )
         if(err) return res.status(400).json({ success: false, err })
         return res.status(200).json({ success: true })
     })
+
+    
 })
 
 router.post('/teamlist', (req, res) => {
@@ -74,7 +94,16 @@ router.post('/teamlist', (req, res) => {
     }
 })
 
+router.get('/team_by_id', (req, res) => {
+    let teamId = req.query.id
+    
+    Team.find({ _id: { $in: teamId } })
+    .populate('member')
+    .exec((err, team) => {
+        if(err) return res.status(400).json(err)
+        return res.status(200).send(team)
+    })
 
-
+})
 
 module.exports = router;

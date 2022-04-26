@@ -20,10 +20,9 @@ const teamSchema = mongoose.Schema({
     description: {
         type: String
     },
-    member: {
-        type: Array,
-        default: []
-    },
+    member: [
+        { type: Schema.Types.ObjectId, ref: 'User' }
+    ],
     views: {
         type: Number,
         default: 0

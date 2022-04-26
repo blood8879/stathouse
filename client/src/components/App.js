@@ -7,6 +7,7 @@ import Auth from '../hoc/auth'
 import RegisterPage from './views/User/RegisterPage/RegisterPage'
 import LoginPage from './views/User/LoginPage/LoginPage'
 import RegisterTeam from './views/Team/RegisterTeam/RegisterTeam'
+import DetailTeamPage from './views/Team/DetailTeamPage/DetailTeamPage'
 
 function App() {
     // null 모든 유저 이용가능
@@ -16,6 +17,7 @@ function App() {
     const AuthRegisterPage = Auth(RegisterPage, false);
     const AuthLoginPage = Auth(LoginPage, false);
     const AuthRegisterTeam = Auth(RegisterTeam, true);
+    const AuthDetailTeamPage = Auth(DetailTeamPage, null);
 
   return (
     <Suspense>
@@ -25,7 +27,8 @@ function App() {
                 <Route path="/" element={<AuthLandingPage />} />
                 <Route path="/login" element={<AuthLoginPage />} />
                 <Route path="/register" element={<AuthRegisterPage />} />
-                <Route path="/team/register" element={<AuthRegisterTeam />} />
+                <Route path="/teams/register" element={<AuthRegisterTeam />} />
+                <Route path="/teams/:teamId" element={<AuthDetailTeamPage />} />
             </Routes>
         </div>
         <Footer />

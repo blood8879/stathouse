@@ -17,6 +17,7 @@ router.get("/auth", auth, (req, res) => {
         name: req.user.name,
         role: req.user.role,
         image: req.user.image,
+        teams: req.user.teams
     });
 });
 
@@ -57,5 +58,57 @@ router.get("/logout", auth, (req, res) => {
         });
     });
 });
+
+router.post('/joinTeam', auth, (req, res) => {
+    let userId = req.body._id
+    let teamId = req.body.teamId
+
+    User.findOne({ _id: userId},
+        (err, teamInfo) => {
+            // 가져온 정보에서 가입하려는 팀이 이미 있는지 확인
+            let duplicate = false;
+
+            teamInfo.teams.forEach((item) => {
+                if(item.id === teamId) {
+                    duplicate = true;
+                    return;
+                }
+            })
+
+            if(duplicate == false)
+                User.findOneAndUpdate(
+                    { _id: userId },
+                    {
+                        $push: {
+                            teams: {
+                                id: teamId,
+                                date: Date.now()
+                            }
+                        }
+                    },
+                    (err, teamInfo) => {
+                        if(err) return res.status(400).json({ success: false, err })
+                        return res.status(200).json({ success: true, teamInfo })
+                    }
+                )
+        }    
+    )
+    // User.findOneAndUpdate(
+    //     { _id: userId},
+    //     {
+    //         $push: {
+    //             teams: {
+    //                 id: teamId,
+    //                 date: Date.now()
+    //             }
+    //         }
+    //     },
+    //     { new: true },
+    //     (err, teamInfo) => {
+    //         if(err) return res.status(400).json({ success: false, err })
+    //         return res.status(200).json({ success: true, teamInfo })
+    //     }
+    // )
+})
 
 module.exports = router;

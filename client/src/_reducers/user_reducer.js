@@ -2,7 +2,8 @@ import {
     AUTH_USER,
     LOGIN_USER,
     LOGOUT_USER,
-    REGISTER_USER
+    REGISTER_USER,
+    ADD_TEAM
 } from '../_actions/types';
 
 export default function(state={}, action) {
@@ -15,6 +16,8 @@ export default function(state={}, action) {
             return { ...state, userData: action.payload }
         case LOGOUT_USER:
             return { ...state }
+        case ADD_TEAM:
+            return { ...state, userData: { ...state.userData, teams: action.payload } }
         default:
             return state;
     }

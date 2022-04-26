@@ -9,7 +9,7 @@ let auth = (req, res, next) => {
         if(err) throw err;
         if(!user) 
             return res.json({ 
-                isAuth: false, error: true 
+                isAuth: false, error: true , teams: []
             });
 
         req.token = token;

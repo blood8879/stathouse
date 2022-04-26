@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import EmblemUpload from '../../../utils/EmblemUpload'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addTeam } from '../../../../_actions/user_actions';
 
 const { TextArea } = Input;
 
@@ -12,6 +14,7 @@ function RegisterTeam(props) {
     const [Emblem, setEmblem] = useState("")
     const [Description, setDescription] = useState("")
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const updateEmblem = (newEmblem) => {
         setEmblem(newEmblem)
@@ -41,13 +44,15 @@ function RegisterTeam(props) {
             name: Name,
             ticker: Ticker,
             emblem: Emblem.filePath,
-            description: Description
+            description: Description,
+            member: props.user.userData._id
         }
 
         axios.post("/api/teams", body)
             .then(response => {
                 console.log(response.data)
                 if(response.data.success) {
+                    // dispatch(addTeam(body))
                     alert('팀이 등록 되었습니다.')
                     navigate('/')
                 } else {
