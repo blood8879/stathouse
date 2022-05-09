@@ -45,7 +45,7 @@ function RegisterTeam(props) {
             ticker: Ticker,
             emblem: Emblem.filePath,
             description: Description,
-            member: props.user.userData._id
+            squad: props.user.userData._id
         }
 
         axios.post("/api/teams", body)

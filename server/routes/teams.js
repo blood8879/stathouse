@@ -98,7 +98,7 @@ router.get('/team_by_id', (req, res) => {
     let teamId = req.query.id
     
     Team.find({ _id: { $in: teamId } })
-    .populate('member')
+    .populate('squad')
     .exec((err, team) => {
         if(err) return res.status(400).json(err)
         return res.status(200).send(team)

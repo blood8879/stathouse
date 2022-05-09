@@ -20,9 +20,18 @@ const teamSchema = mongoose.Schema({
     description: {
         type: String
     },
-    member: [
-        { type: Schema.Types.ObjectId, ref: 'User' }
-    ],
+    squad: {
+        type: Array,
+        default: []
+    },
+    stadium: {
+        type: Array,
+        default: []
+    },
+    fixture: {
+        type: Array,
+        default: []
+    },
     views: {
         type: Number,
         default: 0

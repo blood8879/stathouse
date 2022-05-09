@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
+const { Team } = require('../models/Team');
 
 //=================================
 //             User
@@ -76,6 +77,18 @@ router.post('/joinTeam', auth, (req, res) => {
             })
 
             if(duplicate == false)
+                Team.findOneAndUpdate(
+                    { _id: teamId },
+                    {
+                        $push: {
+                            squad: {
+                                id: userId,
+                                date: Date.now()
+                            }
+                        }
+                    }
+                )
+
                 User.findOneAndUpdate(
                     { _id: userId },
                     {
@@ -88,9 +101,11 @@ router.post('/joinTeam', auth, (req, res) => {
                     },
                     (err, teamInfo) => {
                         if(err) return res.status(400).json({ success: false, err })
-                        return res.status(200).json({ success: true, teamInfo })
+                        return res.status(200).json({ success: true, teamInfo })    
                     }
                 )
+
+                
         }    
     )
     // User.findOneAndUpdate(

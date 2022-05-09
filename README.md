@@ -7,4 +7,4 @@
 
 - 추가 수정해야할 사항(back)
     - teams.js : 새로운 팀 생성시 owner._id 값이 members로 들어가게 수정해줘야함
-    - 
+    - TeamNavBar.js : 팀 가입시 Teams 안에 Member 추가
