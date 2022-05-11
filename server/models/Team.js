@@ -1,3 +1,4 @@
+const { now } = require('moment');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -35,6 +36,10 @@ const teamSchema = mongoose.Schema({
     views: {
         type: Number,
         default: 0
+    },
+    published: {
+        type: Date,
+        default: Date.now()
     }
 }, {timestamps: true})
 
